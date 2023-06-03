@@ -1,14 +1,62 @@
-Hello World
+<!DOCTYPE html>
 
-<!-- Import the component -->
+<script src="menu.js"></script>
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
 
-<!-- Use it like any other HTML element -->
-<model-viewer 
-    alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum" 
-    src="https://modelviewer.dev/shared-assets/models/NeilArmstrong.glb" 
-    ar environment-image="https://modelviewer.dev/shared-assets/environments/moon_1k.hdr" 
-    poster="https://modelviewer.dev/shared-assets/models/NeilArmstrong.webp" 
-    shadow-intensity="1" 
-    camera-controls touch-action="pan-y">
-</model-viewer>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+
+    <!-- Import the component -->
+
+    <style>
+        model-viewer {
+        width: 800px;
+        height: 600px;
+        }
+        
+    </style>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a onclick="changeProduct('Astronaut')">Astronaut</a>
+        <a onclick="changeProduct('Shoe')">Shoe</a>
+        <a onclick="changeProduct('Duck')">Duck</a>
+    </div>
+
+    <div class="container" onclick="openMenu()">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </div>
+
+
+    <model-viewer
+        id="model"
+        alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum" 
+        src= "https://modelviewer.dev/shared-assets/models/NeilArmstrong.glb"
+        ar environment-image="https://modelviewer.dev/shared-assets/environments/moon_1k.hdr" 
+        poster="https://modelviewer.dev/shared-assets/models/NeilArmstrong.webp" 
+        shadow-intensity="1" 
+        camera-controls touch-action="pan-y">
+
+        <button slot="ar-button" style="background-color: white; border-radius: 4px; border: none; position: absolute; top: 16px; right: 16px; ">
+            Activate AR
+        </button>
+
+    </model-viewer>
+
+
+
+
+</html>
+
+
+
+
+
+
+
