@@ -22,13 +22,18 @@ function changeProduct(name) {
     prod = products.find(item => item.name == name);
     modelViewer.src = prod.link;
 
-    if(prod.name=="SpinningRobot" || prod.name=="RunningRobot"){
+    if(prod.name=="Robot"){
+        modelViewer.setAttribute("auto-rotate","")
+    }else if(prod.name=="SpinningRobot" || prod.name=="RunningRobot"){
         modelViewer.setAttribute("autoplay", "");
 
         if(prod.name=="RunningRobot"){
             modelViewer.setAttribute("animation-name", "Running");
+            modelViewer.setAttribute("skybox-image", "https://modelviewer.dev/shared-assets/environments/spruit_sunrise_1k_HDR.hdr");
         }
     }else{
+        modelViewer.removeAttribute("auto-rotate")
+        modelViewer.removeAttribute("skybox-image");
         modelViewer.removeAttribute("animation-name");
         modelViewer.removeAttribute("autoplay");
     }
@@ -40,6 +45,8 @@ window.addEventListener("load", ()=> {
 
     modelViewer = document.getElementById("model");
     
+    // ----------
+    // Code to add the measurement of item 
     const checkbox = modelViewer.querySelector('#show-dimensions');
     
     function setVisibility(element) {
@@ -52,8 +59,12 @@ window.addEventListener("load", ()=> {
     
     checkbox.addEventListener('change', () => {
         setVisibility(modelViewer.querySelector('#dimLines'));
-        modelViewer.querySelectorAll('button').forEach((hotspot) => {
+        modelViewer.querySelectorAll('button.dot').forEach((hotspot) => {
         setVisibility(hotspot);
+        });
+
+        modelViewer.querySelectorAll('button.dim').forEach((hotspot) => {
+            setVisibility(hotspot);
         });
     });
     
@@ -160,6 +171,15 @@ window.addEventListener("load", ()=> {
         });
     
         renderSVG();
+    });
+    // End of code to add measurement of item
+
+    // ----------
+    // Code to modify the item color
+    document.querySelector('#color-controls').addEventListener('click', (event) => {
+      const colorString = event.target.value;
+        const [material] = modelViewer.model.materials;
+        material.pbrMetallicRoughness.setBaseColorFactor(colorString);
     });
   
 });

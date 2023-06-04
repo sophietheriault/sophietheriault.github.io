@@ -42,6 +42,7 @@
             environment-image="https://modelviewer.dev/shared-assets/environments/moon_1k.hdr" 
             poster="https://modelviewer.dev/shared-assets/models/NeilArmstrong.webp" 
             shadow-intensity="1" 
+            shadow-softness="1"
             camera-controls
             touch-action="pan-y">
 
@@ -70,8 +71,15 @@
 
             <div id="controls" class="dim">
                 <label for="show-dimensions">Show Dimensions:</label>
-                <input id="show-dimensions" type="checkbox" checked="true">
-              </div>
+                <input id="show-dimensions" type="checkbox">
+                
+                <div id="color-controls">
+                    <button value="#ff0000">Red</button>
+                    <button value="#00ff00">Green</button>
+                    <button value="#0000ff">Blue</button>
+                    <button value="default">Default</button>
+                </div>
+            </div>
         </model-viewer>
 
     </body>
