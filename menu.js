@@ -9,6 +9,8 @@ products = [
 
 let body = null
 let modelViewer = null;
+let variantThemeDiv = null;
+let variantColorOptions = null;
 
 function openMenu(){
     document.getElementById("mySidenav").style.width = "250px";
@@ -22,7 +24,11 @@ function changeProduct(name) {
     prod = products.find(item => item.name == name);
     modelViewer.src = prod.link;
 
-    if(prod.name=="Robot"){
+    if(prod.name=="Shoe"){
+        variantThemeDiv.removeAttribute("hidden");
+        hiddeAllVariantColorOption();
+    }
+    else if(prod.name=="Robot"){
         modelViewer.setAttribute("auto-rotate","")
     }else if(prod.name=="SpinningRobot" || prod.name=="RunningRobot"){
         modelViewer.setAttribute("autoplay", "");
@@ -36,14 +42,28 @@ function changeProduct(name) {
         modelViewer.removeAttribute("skybox-image");
         modelViewer.removeAttribute("animation-name");
         modelViewer.removeAttribute("autoplay");
+        variantThemeDiv.setAttribute("hidden", "true");
+        hiddeAllVariantColorOption(false);
     }
 
     closeNav();
 }
 
+function hiddeAllVariantColorOption(hidden=true){
+    for(i=0; i < variantColorOptions.length; ++i){
+        if(hidden){
+            variantColorOptions[i].setAttribute("hidden", "true")
+        }else{
+            variantColorOptions[i].removeAttribute("hidden")
+        }
+    }
+}
+
 window.addEventListener("load", ()=> {
 
     modelViewer = document.getElementById("model");
+    variantThemeDiv = document.getElementById("variant-div");
+    variantColorOptions = document.getElementsByClassName("variant-color-option");
     
     // ----------
     // Code to add the measurement of item 
@@ -181,5 +201,35 @@ window.addEventListener("load", ()=> {
         const [material] = modelViewer.model.materials;
         material.pbrMetallicRoughness.setBaseColorFactor(colorString);
     });
-  
+
+
+    // -------
+    // Code for the variant color theme of item
+    let already_open_variant=false;
+    const select_variant = document.querySelector('#variant');
+    modelViewer.addEventListener('load', () => {
+        
+        if(already_open_variant){
+            select_variant.innerHTML=''
+        }
+
+        const names = modelViewer.availableVariants;
+        for (const name of names) {
+          const option = document.createElement('option');
+          option.value = name;
+          option.textContent = name;
+          select_variant.appendChild(option);
+        }
+        // Adds a default option.
+        const option = document.createElement('option');
+        option.value = 'default';
+        option.textContent = 'Default';
+        select_variant.appendChild(option);
+
+        already_open_variant=true;
+      });
+      
+      select_variant.addEventListener('input', (event) => {
+        modelViewer.variantName = event.target.value === 'default' ? null : event.target.value;
+    });
 });
