@@ -10,10 +10,6 @@ products = [
 let body = null
 let modelViewer = null;
 
-// let DEFAULT_NAME=""
-// let DEFAULT_SRC = "https://modelviewer.dev/shared-assets/models/NeilArmstrong.glb"
-// let DEFAULT_ALT_STR="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum"
-
 function openMenu(){
     document.getElementById("mySidenav").style.width = "250px";
 }
@@ -40,39 +36,9 @@ function changeProduct(name) {
     closeNav();
 }
 
-// function createModelViewer(alt_str=DEFAULT_ALT_STR, src_path=DEFAULT_SRC){
-//     let model_viewer = document.createElement('model-viewer');
-// 	model_viewer.setAttribute("id", "model");
-// 	model_viewer.setAttribute("alt", alt_str);
-// 	model_viewer.setAttribute("src", src_path);
-// 	model_viewer.setAttribute("ar", "");
-// 	model_viewer.setAttribute("environment-image", "https://modelviewer.dev/shared-assets/environments/moon_1k.hdr");
-// 	model_viewer.setAttribute("poster", "https://modelviewer.dev/shared-assets/models/NeilArmstrong.webp");
-// 	model_viewer.setAttribute("shadow-intensity", "1");
-// 	model_viewer.setAttribute("camera-controls", "");
-// 	model_viewer.setAttribute("pan-y", "");
-
-//     let btn_model_viewer = document.createElement('button');
-//     btn_model_viewer.setAttribute("class", "ar-button");
-//     btn_model_viewer.setAttribute("slot", "ar-button");
-//     btn_model_viewer.setAttribute("pan-y", "");
-//     btn_model_viewer.textContent = "Activate AR";
-
-//     model_viewer.appendChild(btn_model_viewer)
-
-//     return model_viewer
-// }
-
 window.addEventListener("load", ()=> {
-    // body = document.getElementById("body");
-    // body.appendChild(model_viewer)
 
     modelViewer = document.getElementById("model");
-
-    
-    // modelViewer.querySelector('#item-selector').addEventListener('onclick', (event) => {
-    //     modelViewer.src = event.target.value;
-    // });
     
     const checkbox = modelViewer.querySelector('#show-dimensions');
     
